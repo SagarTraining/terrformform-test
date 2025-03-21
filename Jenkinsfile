@@ -19,8 +19,8 @@ pipeline {
             steps {
                 script {
                     // Write the dev.tfvars content from Jenkins credentials to a file
-                    withCredentials([string(credentialsId: 'tfvars-dev', variable: 'TF_VARS_DEV')]) {
-                        writeFile file: 'dev.tfvars', text: "${TF_VARS_DEV}"
+                    withCredentials([file(credentialsId: 'tfvars-dev-file', variable: 'TF_VARS_FILE')]) {
+                        sh 'cp $TF_VARS_FILE dev.tfvars'
                     }
                 }
             }
