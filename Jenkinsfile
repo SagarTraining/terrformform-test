@@ -11,7 +11,10 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 dir('terraform') {
-                    sh 'terraform init'
+                    script {
+                        def initOutput = sh(script: 'terraform init', returnStdout: true).trim()
+                        echo "Terraform Init Output:\n${initOutput}"
+                    }
                 }
             }
         }
