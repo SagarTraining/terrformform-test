@@ -48,12 +48,12 @@ pipeline {
                 sh 'terraform plan --var-file=dev.tfvars'
             }
         }
-        stage('Terrform Apply'){
-            steps {
-                // Run Terraform apply
-                sh 'terraform apply -auto-approve --var-file=dev.tfvars'
-            }
-        }
+        // stage('Terrform Apply'){
+        //     steps {
+        //         // Run Terraform apply
+        //         sh 'terraform apply -auto-approve --var-file=dev.tfvars'
+        //     }
+        // }
     }
 
     post {
