@@ -23,10 +23,10 @@ pipeline {
 
         stage('Terraform Init') {
             steps {
-                dir('/home/azureuser/jenkins_workspace/terraform_project/terraform') { // Navigate to the terraform directory
-                    script {
-                        def initOutput = sh(script: 'terraform init', returnStdout: true).trim()
-                        echo "Terraform Init Output:\n${initOutput}"
+                // Initialize Terraform
+                dir ( '~/jenkins_workspace/terraform_project' ){
+                script { 
+                    sh 'terraform init'
                     }
                 }
             }
