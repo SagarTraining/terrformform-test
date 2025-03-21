@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 dir('~/jenkins_workspace/terraform_project') { // Clone the repo into the created directory
-                    git url: 'https://github.com/SagarTraining/terrformform-test.git'
+                    checkout scm 
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
-                dir ( '~/jenkins_workspace/terraform_project' ){
+                dir ( '~/jenkins_workspace/terraform_project/terrformform-test' ){
                 script { 
                     sh 'terraform init'
                     }
