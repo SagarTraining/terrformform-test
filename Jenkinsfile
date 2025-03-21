@@ -16,8 +16,8 @@ pipeline {
         }
         stage('Terraform Init') {
             steps {
-                script {
-                    withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
+                // script {
+                //     withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
                         // Set Azure credentials as environment variables
                         // sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
                         // sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
@@ -27,13 +27,13 @@ pipeline {
                         // Run Terraform init
                         sh 'terraform init'
                     }
-                }
-            }
+            //     }
+            // }
         }
         stage('Terraform Plan') {
             steps {
-                script {
-                    withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
+                // script {
+                //     withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
                         // Set Azure credentials as environment variables
                         // sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
                         // sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
@@ -42,43 +42,19 @@ pipeline {
 
                         // Run Terraform plan
                         sh 'terraform plan --var-file=dev.tfvars'
-                    }
-                }
+                    // }
+                // }
             }
         }
-        stage('Terrform Apply'){
-            steps {
-                script {
-                    withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
-                        // Set Azure credentials as environment variables
-                        // sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
-                        // sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
-                        // sh 'export ARM_SUBSCRIPTION_ID=$MY_CRED_SUBSCRIPTION_ID'
-                        // sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
-
-                        // Run Terraform apply
-                        sh 'terraform apply -auto-approve --var-file=dev.tfvars'
-                    }
-                }
-            }
-        }
-        // stage('Terraform Apply') {
-        //     steps {
-        //         script {
-        //             withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
-        //                 // Set Azure credentials as environment variables
-        //                 sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
-        //                 sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
-        //                 sh 'export ARM_SUBSCRIPTION_ID=$MY_CRED_SUBSCRIPTION_ID'
-        //                 sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
-
-        //                 // Run Terraform apply
-        //                 sh 'terraform apply -auto-approve'
-        //             }
-        //         }
-        //     }
-        // }
-    }
+    //     stage('Terrform Apply'){
+    //         steps {
+    //             script {
+    //                 withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
+    //                     sh 'terraform apply -auto-approve --var-file=dev.tfvars'
+    //                 }
+    //             }
+    //         }
+    // }
 
     post {
         success {
