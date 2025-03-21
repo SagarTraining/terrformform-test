@@ -18,12 +18,9 @@ pipeline {
         stage('Prepare dev.tfvars') {
             steps {
                 script {
-                    // Write the dev.tfvars content to a temporary directory
-                    withCredentials([string(credentialsId: 'tfvars-dev', variable: 'TF_VARS_DEV')]) {
-                        sh '''
-                        mkdir -p /tmp/terraform
-                        echo "${TF_VARS_DEV}" > /tmp/terraform/dev.tfvars
-                        '''
+                    // Write the dev.tfvars content from Jenkins credentials to a file
+                    withCredentials([file(credentialsId: 'tfvars-dev-file', variable: 'TF_VARS_FILE')]) {
+                        sh 'sudo cp $TF_VARS_FILE dev.tfvars'
                     }
                 }
             }
