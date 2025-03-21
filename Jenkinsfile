@@ -16,8 +16,9 @@ pipeline {
         stage('Checkout') {
             steps {
                 // dir('~/jenkins_workspace/terraform_project') { // Clone the repo into the created directory
-                    checkout scm 
-                }
+                //     checkout scm 
+                // }
+                checkout scm 
             }
         }
 
@@ -30,7 +31,7 @@ pipeline {
                     }
                 // Pause the build for manual confirmation
                 // input message: 'Terraform Init completed. Do you want to proceed?', ok: 'Yes, continue'
-                }
+                // }
             }
         }
 
