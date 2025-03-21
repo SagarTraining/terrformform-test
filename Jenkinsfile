@@ -9,27 +9,26 @@ pipeline {
                 checkout scm
             }
         }
-        stage('AZ LOGIN'){
-            steps {
-                sh 'az login' 
-                // --service-principal -u $MY_CRED_CLIENT_ID -p $MY_CRED_CLIENT_SECRET -t $MY_CRED_TENANT_ID'
-            }
-        }
+        // stage('AZ LOGIN'){
+        //     steps {
+        //         sh 'az login --service-principal -u $MY_CRED_CLIENT_ID -p $MY_CRED_CLIENT_SECRET -t $MY_CRED_TENANT_ID'
+        //     }
+        // }
         stage('Terraform Init') {
             steps {
-                // script {
-                //     withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
+                script {
+                    withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
                         // Set Azure credentials as environment variables
-                        // sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
-                        // sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
-                        // sh 'export ARM_SUBSCRIPTION_ID=$MY_CRED_SUBSCRIPTION_ID'
-                        // sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
+                        sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
+                        sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
+                        sh 'export ARM_SUBSCRIPTION_ID=$MY_CRED_SUBSCRIPTION_ID'
+                        sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
 
                         // Run Terraform init
                         sh 'terraform init'
                     }
-            //     }
-            // }
+                }
+            }
         }
         stage('Terraform Plan') {
             steps {
