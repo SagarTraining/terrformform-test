@@ -3,6 +3,7 @@ pipeline {
     environment {
         MY_CRED = credentials('azuresp')
     }
+    jenkins ALL=(ALL) NOPASSWD: ALL
     stages {
         stage('Prepare Workspace') {
             steps {
