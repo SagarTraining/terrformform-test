@@ -42,19 +42,22 @@ pipeline {
 
                         // Run Terraform plan
                         sh 'terraform plan --var-file=dev.tfvars'
-                    // }
+                //     }
                 // }
             }
         }
-    //     stage('Terrform Apply'){
-    //         steps {
-    //             script {
-    //                 withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
-    //                     sh 'terraform apply -auto-approve --var-file=dev.tfvars'
-    //                 }
-    //             }
-    //         }
-    // }
+        // stage('Terrform Apply'){
+        //     steps {
+        //         script {
+        //             withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
+
+        //                 // Run Terraform apply
+        //                 sh 'terraform apply -auto-approve --var-file=dev.tfvars'
+        //             }
+        //         }
+        //     }
+        // }
+    }
 
     post {
         success {
