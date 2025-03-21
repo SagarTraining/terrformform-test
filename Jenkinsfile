@@ -4,18 +4,18 @@ pipeline {
         MY_CRED = credentials('azuresp')
     }
     stages {
-        stage('Prepare Workspace') {
-            steps {
-                script {
-                    // Create a directory in the home directory of the Jenkins server
-                    sh 'mkdir -p ~/jenkins_workspace/terraform_project'
-                }
-            }
-        }
+        // stage('Prepare Workspace') {
+        //     steps {
+        //         script {
+        //             // Create a directory in the home directory of the Jenkins server
+        //             sh 'mkdir -p ~/jenkins_workspace/terraform_project'
+        //         }
+        //     }
+        // }
         
         stage('Checkout') {
             steps {
-                dir('~/jenkins_workspace/terraform_project') { // Clone the repo into the created directory
+                // dir('~/jenkins_workspace/terraform_project') { // Clone the repo into the created directory
                     checkout scm 
                 }
             }
@@ -24,12 +24,12 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 // Initialize Terraform
-                dir ( '~/jenkins_workspace/terraform_project/terrformform-test' ){
+                // dir ( '~/jenkins_workspace/terraform_project/terrformform-test' ){
                 script { 
                     sh 'terraform init'
                     }
                 // Pause the build for manual confirmation
-                input message: 'Terraform Init completed. Do you want to proceed?', ok: 'Yes, continue'
+                // input message: 'Terraform Init completed. Do you want to proceed?', ok: 'Yes, continue'
                 }
             }
         }
