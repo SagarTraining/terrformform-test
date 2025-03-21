@@ -28,6 +28,8 @@ pipeline {
                 script { 
                     sh 'terraform init'
                     }
+                // Pause the build for manual confirmation
+                input message: 'Terraform Init completed. Do you want to proceed?', ok: 'Yes, continue'
                 }
             }
         }
