@@ -19,10 +19,10 @@ pipeline {
                 script {
                     withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
                         // Set Azure credentials as environment variables
-                        sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
-                        sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
-                        sh 'export ARM_SUBSCRIPTION_ID=$MY_CRED_SUBSCRIPTION_ID'
-                        sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
+                        // sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
+                        // sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
+                        // sh 'export ARM_SUBSCRIPTION_ID=$MY_CRED_SUBSCRIPTION_ID'
+                        // sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
 
                         // Run Terraform init
                         sh 'terraform init'
