@@ -3,13 +3,12 @@ pipeline {
     environment {
         MY_CRED = credentials('azuresp')
     }
-    jenkins ALL=(ALL) NOPASSWD: ALL
     stages {
         stage('Prepare Workspace') {
             steps {
                 script {
                     // Create a directory in the home directory of the Jenkins server
-                    sh 'mkdir -p /home/azureuser/jenkins_workspace/terraform_project'
+                    sh 'mkdir -p ~/jenkins_workspace/terraform_project'
                 }
             }
         }
