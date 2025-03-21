@@ -57,7 +57,7 @@ pipeline {
                         // sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
 
                         // Run Terraform apply
-                        sh 'terraform apply --var-file=dev.tfvars'
+                        sh 'terraform apply -auto-approve --var-file=dev.tfvars'
                     }
                 }
             }
