@@ -35,6 +35,27 @@ pipeline {
             }
         }
 
+        stage('Terraform Apply') {
+            steps {
+                // Apply Terraform changes
+                // dir ('/var/lib/jenkins/workspace/terraform/terraform'){
+                script {
+                    withCredentials([azureServicePrincipal(credentialsId: 'azuresp', variable: 'azuresp')]) {
+                        // Set Azure credentials
+                        // sh 'az login --service-principal -u $MY_CRED_CLIENT_ID -p $MY_CRED_CLIENT_SECRET -t $MY_CRED_TENANT_ID'
+                        sh 'export ARM_CLIENT_ID=$MY_CRED_CLIENT_ID'
+                        sh 'export ARM_CLIENT_SECRET=$MY_CRED_CLIENT_SECRET'
+                        sh 'export ARM_SUBSCRIPTION_ID=$MY_CRED_SUBSCRIPTION_ID'
+                        sh 'export ARM_TENANT_ID=$MY_CRED_TENANT_ID'
+
+                        // Run Terraform apply
+                        sh 'sudo terraform apply -auto-approve'
+                        }
+                    }
+                // }
+            }
+        }
+
     }
 
     post {
