@@ -14,6 +14,18 @@ pipeline {
         //         sh 'az login --service-principal -u $MY_CRED_CLIENT_ID -p $MY_CRED_CLIENT_SECRET -t $MY_CRED_TENANT_ID'
         //     }
         // }
+
+        stage('Prepare dev.tfvars') {
+            steps {
+                script {
+                    // Write the dev.tfvars content from Jenkins credentials to a file
+                    withCredentials([string(credentialsId: 'tfvars-dev', variable: 'TF_VARS_DEV')]) {
+                        writeFile file: 'dev.tfvars', text: "${TF_VARS_DEV}"
+                    }
+                }
+            }
+        }
+
         stage('Terraform Init') {
             steps {
                 script {
